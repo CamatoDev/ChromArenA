@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8fd2a0aee654548aecb3db847324aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  follow_target: {fileID: 1752303527}
+  follow_target: {fileID: 3386518997037074361}
   distance: 2
   maxVerticalAngle: 45
   minVerticalAngle: -20
@@ -329,11 +329,6 @@ MonoBehaviour:
   framingOffset: {x: 0, y: 1.76}
   invertX: 1
   invertY: 0
---- !u!4 &1752303527 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3386518996676303992, guid: a920dbbbe480cb74ea3e1b8585d19ec7, type: 3}
-  m_PrefabInstance: {fileID: 1837177793}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1837177793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -344,15 +339,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3386518996676303992, guid: a920dbbbe480cb74ea3e1b8585d19ec7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.4300003
+      value: 12.68
       objectReference: {fileID: 0}
     - target: {fileID: 3386518996676303992, guid: a920dbbbe480cb74ea3e1b8585d19ec7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.0360003
+      value: -0.21399975
       objectReference: {fileID: 0}
     - target: {fileID: 3386518996676303992, guid: a920dbbbe480cb74ea3e1b8585d19ec7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.737
+      value: -7.7370005
       objectReference: {fileID: 0}
     - target: {fileID: 3386518996676303992, guid: a920dbbbe480cb74ea3e1b8585d19ec7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -391,6 +386,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a920dbbbe480cb74ea3e1b8585d19ec7, type: 3}
+--- !u!4 &3386518997037074361 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3386518996676303992, guid: a920dbbbe480cb74ea3e1b8585d19ec7, type: 3}
+  m_PrefabInstance: {fileID: 1837177793}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8266570282453331189
 PrefabInstance:
   m_ObjectHideFlags: 0
