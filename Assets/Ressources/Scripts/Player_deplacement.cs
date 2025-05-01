@@ -75,16 +75,16 @@ public class Player_mouvement : MonoBehaviour
             targetRotation = Quaternion.LookRotation(moveDirection);
             moveSpeed = 5f;
         }
-        
+
         //Pour courir
-        //if(Input.GetKey(KeyCode.LeftShift))
-        //{
-        //    moveAmount = 2f;
-        //    moveSpeed = runSpeed;
-        //}
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            moveAmount = 2f;
+            moveSpeed = runSpeed;
+        }
 
         //Gestion de la rotation smooth
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
         animator.SetFloat("moveAmount", moveAmount, 0.2f, Time.deltaTime);
     }
@@ -97,99 +97,5 @@ public class Player_mouvement : MonoBehaviour
     {
         Gizmos.color = new Color(0, 1, 0, 0.5f);
         Gizmos.DrawSphere(transform.TransformPoint(groundCheckOffset), groundCheckRadius);
-    }
-
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.CompareTag("Pick"))
-        {
-            Debug.Log("Le joueur à touché un piège.");
-            Debug.Log("- 5 points de vie!");
-            playerLive -= 5f;
-        }
-
-        if (collision.transform.CompareTag("DoorClose"))
-        {
-            if (haveKey)
-            {
-                Debug.Log("Le joueur a une clé pour ouvir la porte.");
-                Destroy(collision.transform.gameObject);
-                Debug.Log("La porte s'ouvre !");
-                haveKey = false;
-            }
-            else
-            {
-                Debug.Log("Le joueur n'a de clé pour ouvir la porte.");
-                Debug.Log("Allez chercher la clé !");
-            }
-        }
-    }
-
-    public void OnCollisionStay(Collision collision)
-    {
-        if (collision.transform.CompareTag("Pick"))
-        {
-            Debug.Log("- 1 points de vie!");
-            playerLive -= 1f;
-        }
-    }
-
-    public void OnCollisionExit(Collision collision)
-    {
-        if (collision.transform.CompareTag("Pick"))
-        {
-            Debug.Log("exit to collision");
-        }
-    }
-
-    public void OnTriggerEnter(Collider collision)
-    {
-        if (collision.transform.CompareTag("coinSilver"))
-        {
-            Debug.Log("Le joueur à touché la pièce d'argent.");
-            Destroy(collision.transform.gameObject);
-            Debug.Log("+ 10 points !");
-            playerScore += 10f;
-        }
-
-        if (collision.transform.CompareTag("coinGold"))
-        {
-            Debug.Log("Le joueur à touché la pièce d'or.");
-            Destroy(collision.transform.gameObject);
-            Debug.Log("+ 20 points !");
-            playerScore += 20f;
-        }
-
-        if (collision.transform.CompareTag("BigCoinGold"))
-        {
-            Debug.Log("Le joueur à touché la pièce d'or géante.");
-            Destroy(collision.transform.gameObject);
-            Debug.Log("+ 100 points !");
-            playerScore += 100f;
-        }
-
-        if (collision.transform.CompareTag("Key"))
-        {
-            Debug.Log("Le joueur à récuperer une clé.");
-            Destroy(collision.transform.gameObject);
-            haveKey = true;
-        }
-    }
-
-    public void OnTriggerStay(Collider collision)
-    {
-        if (collision.transform.CompareTag("coinSilver") ||
-            collision.transform.CompareTag("coinGold"))
-        {
-            Debug.Log("stay in Trigger");
-        }
-    }
-    public void OnTriggerExit(Collider collision)
-    {
-        if (collision.transform.CompareTag("coinSilver") ||
-            collision.transform.CompareTag("coinGold"))
-        {
-            Debug.Log("exit to Trigger");
-        }
     }
 }

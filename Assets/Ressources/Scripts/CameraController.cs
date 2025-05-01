@@ -52,7 +52,7 @@ public class CameraController : MonoBehaviour
         //Defintion de la rotation 
         var targetRotation = Quaternion.Euler(rotationX, rotationY, 0.0f);
 
-        //ajustement de la position 
+        //ajustement de la position
         var focusPosition = follow_target.position + new Vector3(framingOffset.x, framingOffset.y);
 
         //Position et rotation de la camera 

@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Player_shoot : MonoBehaviour
 {
+    public Transform camera;
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float fireRange = 10f;
-    private Renderer rend;
+    private Renderer _rend;
 
     public float fireRate = 1f;
-    private float fireCountDown = 0f;
+    private float _fireCountDown = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,20 +21,26 @@ public class Player_shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && fireCountDown <= 0)
+        var rotation = camera.rotation;
+        rotation.z = 0;
+        rotation.x = 0;
+        firePoint.rotation = camera.rotation;
+        transform.rotation = rotation;
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) && _fireCountDown <= 0)
         {
             Shoot();
-            fireCountDown = 1 / fireRate;
+            _fireCountDown = 1 / fireRate;
         }
 
-        fireCountDown -= Time.deltaTime;
+        _fireCountDown -= Time.deltaTime;
     }
 
     public void Shoot()
     {
         Debug.Log("Tir effectué !");
         GameObject bullet = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        rend = bullet.GetComponent<Renderer>();
+        _rend = bullet.GetComponent<Renderer>();
         RaycastHit hit;
 
         if (Physics.Raycast(firePoint.transform.position, firePoint.transform.TransformDirection(Vector3.forward), out hit, fireRange))
@@ -43,7 +50,7 @@ public class Player_shoot : MonoBehaviour
             if (hit.transform.tag == "Obstacle")
             {
                 //Destroy(bullet);
-                hit.transform.GetComponent<Renderer>().material.color = rend.material.color;
+                hit.transform.GetComponent<Renderer>().material.color = _rend.material.color;
             }
         }
     }
