@@ -65,7 +65,10 @@ public class Player_mouvement : MonoBehaviour
         //on fait tomber le joueur 
         velocity.y = ySpeed;
         //Déplacement du joueur
-        characterController.Move(velocity * Time.deltaTime);
+        if (!Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            characterController.Move(velocity * Time.deltaTime);
+        }
 
 
         //Vérification du déplacement 
@@ -87,6 +90,45 @@ public class Player_mouvement : MonoBehaviour
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
         animator.SetFloat("moveAmount", moveAmount, 0.2f, Time.deltaTime);
+
+
+
+
+        // Gestion des animaions avec armes
+        float horizontalValue = Input.GetAxis("Horizontal");
+        float verticalValue = Input.GetAxis("Vertical");
+
+        // Vérification des valeurs des inputs
+        float shootState = 0f;
+
+        if (horizontalValue > 0)
+        {
+            shootState = 1f;
+        }
+        if (horizontalValue < 0)
+        {
+            shootState = -1f;
+        }
+        if (verticalValue > 0)
+        {
+            shootState = 2f;
+        }
+        if (verticalValue < 0)
+        {
+            shootState = -2f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            animator.SetBool("RightClick", true);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            animator.SetBool("RightClick", false);
+        }
+
+        animator.SetFloat("ShootState", shootState, 0.2f, Time.deltaTime);
     }
 
     void GroundeCheck()

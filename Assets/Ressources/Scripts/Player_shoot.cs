@@ -9,13 +9,14 @@ public class Player_shoot : MonoBehaviour
     public Transform firePoint;
     public float fireRange = 10f;
     private Renderer _rend;
+    private Animator _animator;
 
     public float fireRate = 1f;
     private float _fireCountDown = 0f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        _animator = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -39,6 +40,7 @@ public class Player_shoot : MonoBehaviour
     public void Shoot()
     {
         Debug.Log("Tir effectué !");
+        _animator.SetTrigger("LeftClick");
         GameObject bullet = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         _rend = bullet.GetComponent<Renderer>();
         RaycastHit hit;
