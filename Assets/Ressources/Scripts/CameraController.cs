@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
-{
+{   
     [SerializeField] Transform follow_target;
     [SerializeField] float distance = 5f;
 

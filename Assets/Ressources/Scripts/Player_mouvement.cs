@@ -7,6 +7,7 @@ public class Player_mouvement : MonoBehaviour
     [Header("Deplacement Speeds")]
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float runSpeed = 8f;
+    [SerializeField] float aimingSpeed = 2f;
     [SerializeField] float rotationSpeed = 500;
 
     [Header("Ground Check Settings")]
@@ -65,14 +66,15 @@ public class Player_mouvement : MonoBehaviour
         //on fait tomber le joueur 
         velocity.y = ySpeed;
         //Déplacement du joueur
-        if (!Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            characterController.Move(velocity * Time.deltaTime);
-        }
+        characterController.Move(velocity * Time.deltaTime);
+        //if (!Input.GetKey(KeyCode.Mouse0))
+        //{
+        //    characterController.Move(velocity * Time.deltaTime);
+        //}
 
 
-        //Vérification du déplacement 
-        if (moveAmount > 0) 
+        //Vérification du déplacements
+        if (moveAmount > 0 && !Input.GetKey(KeyCode.Mouse1)) 
         {
             //Orientation du joueur
             targetRotation = Quaternion.LookRotation(moveDirection);
@@ -90,9 +92,6 @@ public class Player_mouvement : MonoBehaviour
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
         animator.SetFloat("moveAmount", moveAmount, 0.2f, Time.deltaTime);
-
-
-
 
         // Gestion des animaions avec armes
         float horizontalValue = Input.GetAxis("Horizontal");
@@ -117,10 +116,13 @@ public class Player_mouvement : MonoBehaviour
         {
             shootState = -2f;
         }
+        if (moveAmount <= 0f)
+            shootState = 0.1f;
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             animator.SetBool("RightClick", true);
+            moveSpeed = aimingSpeed;
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse1))

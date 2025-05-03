@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player_shoot : MonoBehaviour
 {
+    private Player_mouvement _playerMove;
     public Transform camera;
     public GameObject bulletPrefab;
     public Transform firePoint;
@@ -17,6 +18,7 @@ public class Player_shoot : MonoBehaviour
     void Start()
     {
         _animator = gameObject.GetComponent<Animator>();
+        _playerMove = gameObject.GetComponent<Player_mouvement>();
     }
 
     // Update is called once per frame
