@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player_shoot : MonoBehaviour
 {
     private Player_mouvement _playerMove;
-    public Transform camera;
+    private Transform _mainCamera;
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float fireRange = 10f;
@@ -19,15 +19,16 @@ public class Player_shoot : MonoBehaviour
     {
         _animator = gameObject.GetComponent<Animator>();
         _playerMove = gameObject.GetComponent<Player_mouvement>();
+        _mainCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        var rotation = camera.rotation;
+        var rotation = _mainCamera.rotation;
         rotation.z = 0;
         rotation.x = 0;
-        firePoint.rotation = camera.rotation;
+        firePoint.rotation = _mainCamera.rotation;
         transform.rotation = rotation;
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && _fireCountDown <= 0)
