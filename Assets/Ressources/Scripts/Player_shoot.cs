@@ -32,6 +32,7 @@ public class Player_shoot : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && _fireCountDown <= 0)
         {
+            _playerMove.isCrouch = !_playerMove.isCrouch;
             Shoot();
             _fireCountDown = 1 / fireRate;
         }

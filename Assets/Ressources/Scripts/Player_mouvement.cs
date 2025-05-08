@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player_mouvement : MonoBehaviour
 {
+    public Transform james;
     [Header("Deplacement Speeds")]
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float runSpeed = 8f;
@@ -20,7 +21,7 @@ public class Player_mouvement : MonoBehaviour
     [Header("Player info")]
     public float playerScore = 0f;
     public float playerLive = 100f;
-    bool haveKey = false;
+    public bool isCrouch = false;
 
     CameraController cameraController;
     Animator animator;
@@ -74,7 +75,7 @@ public class Player_mouvement : MonoBehaviour
 
 
         //Vérification du déplacements
-        if (moveAmount > 0 && !Input.GetKey(KeyCode.Mouse1)) 
+        if (moveAmount > 0 && !Input.GetKey(KeyCode.Mouse1) && !isCrouch) 
         {
             //Orientation du joueur
             targetRotation = Quaternion.LookRotation(moveDirection);
@@ -89,15 +90,42 @@ public class Player_mouvement : MonoBehaviour
         }
 
         //Gestion de la rotation smooth
-        //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        //james.rotation = Quaternion.RotateTowards(james.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-        animator.SetFloat("moveAmount", moveAmount, 0.2f, Time.deltaTime);
+        if(!isCrouch)
+            animator.SetFloat("moveAmount", moveAmount, 0.2f, Time.deltaTime);
 
         // Gestion des animaions avec armes
         float horizontalValue = Input.GetAxis("Horizontal");
         float verticalValue = Input.GetAxis("Vertical");
 
-        // Vérification des valeurs des inputs
+        // Vérification des valeurs des inputs pour le déplacement en position accroupi
+        float crouchState = 0f;
+        if (isCrouch)
+        {
+            if (horizontalValue > 0)
+            {
+                crouchState = 1f;
+            }
+            if (horizontalValue < 0)
+            {
+                crouchState = -1f;
+            }
+            if (verticalValue > 0)
+            {
+                crouchState = 2f;
+            }
+            if (verticalValue < 0)
+            {
+                crouchState = -2f;
+            }
+            if (moveAmount <= 0f)
+                crouchState = 0.1f;
+
+            animator.SetFloat("crouchState", crouchState, 0.2f, Time.deltaTime);
+        }
+
+        // Vérification des valeurs des inputs pour le déplacement en position de tir
         float shootState = 0f;
 
         if (horizontalValue > 0)
@@ -128,6 +156,21 @@ public class Player_mouvement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
             animator.SetBool("RightClick", false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.C) && !isCrouch)
+        {
+            Debug.Log("accroupi");
+            animator.SetTrigger("Crouch");
+            moveSpeed = aimingSpeed;
+            isCrouch = !isCrouch;
+        }
+        else if (Input.GetKeyDown(KeyCode.C) && isCrouch)
+        {
+            Debug.Log("Debout");
+            animator.SetTrigger("standUp");
+            moveSpeed = 5f;
+            isCrouch = !isCrouch;
         }
 
         animator.SetFloat("ShootState", shootState, 0.2f, Time.deltaTime);

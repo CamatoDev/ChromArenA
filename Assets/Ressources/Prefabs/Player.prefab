@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 770a28ae15b84814596adabcdc9a021d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  james: {fileID: 831677531980223237}
   moveSpeed: 5
   runSpeed: 10
   aimingSpeed: 2
@@ -112,6 +113,7 @@ MonoBehaviour:
     m_Bits: 64
   playerScore: 0
   playerLive: 100
+  isCrouch: 0
 --- !u!143 &4009190076712002450
 CharacterController:
   m_ObjectHideFlags: 0
