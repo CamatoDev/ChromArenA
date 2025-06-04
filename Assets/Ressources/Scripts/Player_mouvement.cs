@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player_mouvement : MonoBehaviour
 {
@@ -162,6 +164,7 @@ public class Player_mouvement : MonoBehaviour
         {
             Debug.Log("accroupi");
             animator.SetTrigger("Crouch");
+            StartCoroutine(DownScaleCollider());
             moveSpeed = aimingSpeed;
             isCrouch = !isCrouch;
         }
@@ -169,6 +172,7 @@ public class Player_mouvement : MonoBehaviour
         {
             Debug.Log("Debout");
             animator.SetTrigger("standUp");
+            StartCoroutine(UpScaleCollider());
             moveSpeed = 5f;
             isCrouch = !isCrouch;
         }
@@ -179,6 +183,34 @@ public class Player_mouvement : MonoBehaviour
     void GroundeCheck()
     {
         isGrounded = Physics.CheckSphere(transform.TransformPoint(groundCheckOffset), groundCheckRadius, groundLayer);
+    }
+
+    // DownScale = Agrandir la boite de collision
+    IEnumerator DownScaleCollider()
+    {
+        float t = 1.761f;
+
+        while (t > 1f)
+        {
+            t -= Time.deltaTime;
+            float a = t;
+            characterController.height = a;
+            yield return 0;
+        }
+    }
+
+    // UpScale = Agrandir la boite de collision
+    IEnumerator UpScaleCollider()
+    {
+        float t = 1f;
+
+        while (t < 1.762f)
+        {
+            t += Time.deltaTime;
+            float a = t;
+            characterController.height = a;
+            yield return 0;
+        }
     }
     private void OnDrawGizmosSelected()
     {
