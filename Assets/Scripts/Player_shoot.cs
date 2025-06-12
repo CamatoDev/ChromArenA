@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Player_shoot : MonoBehaviour
+public class Player_shoot : NetworkBehaviour
 {
     private Player_mouvement _playerMove;
     public Transform playerCamera;
@@ -14,6 +13,9 @@ public class Player_shoot : MonoBehaviour
 
     public float fireRate = 1f;
     private float _fireCountDown = 0f;
+
+    [SerializeField]
+    private LayerMask _mask;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +43,7 @@ public class Player_shoot : MonoBehaviour
         _fireCountDown -= Time.deltaTime;
     }
 
+    [Client]
     public void Shoot()
     {
         Debug.Log("Tir effectué !");
@@ -49,15 +52,26 @@ public class Player_shoot : MonoBehaviour
         _rend = bullet.GetComponent<Renderer>();
         RaycastHit hit;
 
-        if (Physics.Raycast(firePoint.transform.position, firePoint.transform.TransformDirection(Vector3.forward), out hit, fireRange))
+        if (Physics.Raycast(firePoint.transform.position, firePoint.transform.TransformDirection(Vector3.forward), out hit, fireRange, _mask))
         {
             Debug.DrawLine(firePoint.transform.position, hit.point, Color.red);
 
             if (hit.transform.tag == "Obstacle")
             {
+                CmdPlayerShot(hit.transform.name);
                 //Destroy(bullet);
                 hit.transform.GetComponent<Renderer>().material.color = _rend.material.color;
             }
+            if (hit.transform.tag == "Player")
+            {
+                CmdPlayerShot(hit.transform.name);
+            }
         }
+    }
+
+    [Command]
+    public void CmdPlayerShot(string playerName)
+    {
+        Debug.Log(playerName + " à été touché");
     }
 }
