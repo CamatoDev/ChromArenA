@@ -1403,10 +1403,10 @@ GameObject:
   - component: {fileID: 3943679851597076113}
   - component: {fileID: 4009190076712002450}
   - component: {fileID: 1436351370460393056}
-  - component: {fileID: 1993667795398224517}
   - component: {fileID: -8899895133141024228}
   - component: {fileID: 6397883521949751994}
   - component: {fileID: -4940247300997842380}
+  - component: {fileID: -8162189896960079158}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -1525,25 +1525,13 @@ MonoBehaviour:
   firePoint: {fileID: 6659163318255858089}
   fireRange: 25
   fireRate: 5
+  weapon:
+    name: Basic Gun
+    damage: 10
+    range: 25
   _mask:
     serializedVersion: 2
     m_Bits: 375
---- !u!114 &1993667795398224517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4175022761961517748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1b2dfc51d9609741a2bd848f31a1cd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentLive: 0
-  healthBar: {fileID: 0}
-  damage: 0
-  isDead: 0
 --- !u!114 &-8899895133141024228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1578,7 +1566,6 @@ MonoBehaviour:
   syncInterval: 0
   componentsToDisable:
   - {fileID: 3943679851597076113}
-  - {fileID: 1993667795398224517}
   - {fileID: 1436351370460393056}
   - {fileID: 6567162711502282848}
   - {fileID: 3917243761793004857}
@@ -1618,6 +1605,22 @@ MonoBehaviour:
   rotationSensitivity: 0.01
   positionPrecision: 0.01
   scalePrecision: 0.01
+--- !u!114 &-8162189896960079158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4175022761961517748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6759d9095159ce4482a704bd7e61205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  maxHealt: 100
 --- !u!1 &4263732900799051089
 GameObject:
   m_ObjectHideFlags: 0

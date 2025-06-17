@@ -29,15 +29,17 @@ public class PlayerSetup : NetworkBehaviour
                 sceneCamera.gameObject.SetActive(false);
             }
         }
-
-        RegisterPlayer();
     }
 
-    private void RegisterPlayer()
+    public override void OnStartClient()
     {
-        // Passe le nom du joueur au format : Player + Identifiant unique dans Mirror
-        string playerName = "Palyer" + GetComponent<NetworkIdentity>().netId;
-        transform.name = playerName;
+        base.OnStartClient();
+
+        string netID = GetComponent<NetworkIdentity>().netId.ToString();
+        Player player = GetComponent<Player>();
+
+        // Enregister le joueur
+        GameManager.RegisterPlayer(netID, player);
     }
 
     private void AssignRemotePlayer()
@@ -61,5 +63,8 @@ public class PlayerSetup : NetworkBehaviour
         {
         sceneCamera.gameObject.SetActive(true);
         }
+
+        // Desenregistrer le joueur dès que désactivé
+        GameManager.UnRegisterPlayer(transform.name);
     }
 }

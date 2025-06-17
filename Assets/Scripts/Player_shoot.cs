@@ -7,13 +7,13 @@ public class Player_shoot : NetworkBehaviour
     public Transform playerCamera;
     public GameObject bulletPrefab;
     public Transform firePoint;
-    public float fireRange = 10f;
     private Renderer _rend;
     private Animator _animator;
 
     public float fireRate = 1f;
     private float _fireCountDown = 0f;
 
+    public PlayerWeapon weapon;
     [SerializeField]
     private LayerMask _mask;
     // Start is called before the first frame update
@@ -52,26 +52,29 @@ public class Player_shoot : NetworkBehaviour
         _rend = bullet.GetComponent<Renderer>();
         RaycastHit hit;
 
-        if (Physics.Raycast(firePoint.transform.position, firePoint.transform.TransformDirection(Vector3.forward), out hit, fireRange, _mask))
+        if (Physics.Raycast(firePoint.transform.position, firePoint.transform.TransformDirection(Vector3.forward), out hit, weapon.range, _mask))
         {
             Debug.DrawLine(firePoint.transform.position, hit.point, Color.red);
 
             if (hit.transform.tag == "Obstacle")
             {
-                CmdPlayerShot(hit.transform.name);
+                //CmdPlayerShot(hit.transform.name);
                 //Destroy(bullet);
                 hit.transform.GetComponent<Renderer>().material.color = _rend.material.color;
             }
             if (hit.transform.tag == "Player")
             {
-                CmdPlayerShot(hit.transform.name);
+                CmdPlayerShot(hit.transform.name, weapon.damage);
             }
         }
     }
 
     [Command]
-    public void CmdPlayerShot(string playerName)
+    public void CmdPlayerShot(string playerId, float damage)
     {
-        Debug.Log(playerName + " à été touché");
+        Debug.Log(playerId + " à été touché");
+
+        Player player = GameManager.GetPlayer(playerId);
+        player.TakeDamage(damage);
     }
 }
