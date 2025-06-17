@@ -7,6 +7,22 @@ public class GameManager : MonoBehaviour
 
     private static Dictionary<string, Player> players = new Dictionary<string, Player>();
 
+    public MacthSettings macthSettings;
+
+    // Création d'un singleton
+    public static GameManager instance;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            return;
+        }
+
+        Debug.LogError("Plus d'une instance de GameManager dans la scène.");
+    }
+
     // Méthode pour enregistrer un joueur (lors de son instantiation)
     public static void RegisterPlayer(string netID, Player player)
     {

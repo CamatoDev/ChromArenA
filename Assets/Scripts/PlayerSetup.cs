@@ -29,6 +29,9 @@ public class PlayerSetup : NetworkBehaviour
                 sceneCamera.gameObject.SetActive(false);
             }
         }
+
+        // Appele de la fonction des paramètre de base
+        GetComponent<Player>().Setup();
     }
 
     public override void OnStartClient()

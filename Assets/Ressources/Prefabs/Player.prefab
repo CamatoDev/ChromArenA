@@ -1400,13 +1400,13 @@ GameObject:
   m_Component:
   - component: {fileID: 3386518996676303992}
   - component: {fileID: 145375941274328835}
-  - component: {fileID: 3943679851597076113}
-  - component: {fileID: 4009190076712002450}
-  - component: {fileID: 1436351370460393056}
   - component: {fileID: -8899895133141024228}
+  - component: {fileID: 4009190076712002450}
+  - component: {fileID: 3943679851597076113}
+  - component: {fileID: 1436351370460393056}
   - component: {fileID: 6397883521949751994}
-  - component: {fileID: -4940247300997842380}
   - component: {fileID: -8162189896960079158}
+  - component: {fileID: -4940247300997842380}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -1453,7 +1453,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3943679851597076113
+--- !u!114 &-8899895133141024228
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1462,23 +1462,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4175022761961517748}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 770a28ae15b84814596adabcdc9a021d, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  james: {fileID: 831677531980223237}
-  moveSpeed: 5
-  runSpeed: 10
-  aimingSpeed: 2
-  rotationSpeed: 500
-  groundCheckRadius: 0.28
-  groundCheckOffset: {x: 0, y: 0.21, z: 0.07}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  playerScore: 0
-  playerLive: 100
-  isCrouch: 0
-  cameraController: {fileID: 3917243761793004857}
+  sceneId: 0
+  _assetId: 550621268
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!143 &4009190076712002450
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1505,6 +1496,32 @@ CharacterController:
   m_SkinWidth: 0.02
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &3943679851597076113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4175022761961517748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 770a28ae15b84814596adabcdc9a021d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  james: {fileID: 831677531980223237}
+  moveSpeed: 5
+  runSpeed: 10
+  aimingSpeed: 2
+  rotationSpeed: 500
+  groundCheckRadius: 0.28
+  groundCheckOffset: {x: 0, y: 0.21, z: 0.07}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  playerScore: 0
+  playerLive: 100
+  isCrouch: 0
+  cameraController: {fileID: 3917243761793004857}
 --- !u!114 &1436351370460393056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1523,32 +1540,14 @@ MonoBehaviour:
   playerCamera: {fileID: 1733022680552543019}
   bulletPrefab: {fileID: 7823066321700833076, guid: 53b699776819c2b46b79eb71f2b465d9, type: 3}
   firePoint: {fileID: 6659163318255858089}
-  fireRange: 25
   fireRate: 5
   weapon:
     name: Basic Gun
-    damage: 10
+    damage: 40
     range: 25
   _mask:
     serializedVersion: 2
     m_Bits: 375
---- !u!114 &-8899895133141024228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4175022761961517748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  _assetId: 550621268
-  serverOnly: 0
-  visibility: 0
-  hasSpawned: 0
 --- !u!114 &6397883521949751994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1571,6 +1570,26 @@ MonoBehaviour:
   - {fileID: 3917243761793004857}
   - {fileID: 7371520425840394220}
   _remoteLayerName: RemotePlayer
+--- !u!114 &-8162189896960079158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4175022761961517748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6759d9095159ce4482a704bd7e61205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  maxHealt: 100
+  disableOnDeath:
+  - {fileID: 3943679851597076113}
+  - {fileID: 1436351370460393056}
+  - {fileID: 3917243761793004857}
 --- !u!114 &-4940247300997842380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1605,22 +1624,6 @@ MonoBehaviour:
   rotationSensitivity: 0.01
   positionPrecision: 0.01
   scalePrecision: 0.01
---- !u!114 &-8162189896960079158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4175022761961517748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6759d9095159ce4482a704bd7e61205, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  maxHealt: 100
 --- !u!1 &4263732900799051089
 GameObject:
   m_ObjectHideFlags: 0
